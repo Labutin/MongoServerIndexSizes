@@ -6,7 +6,6 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"log"
 	"fmt"
-//	"strconv"
 )
 
 // getMongoDBConnection init MongoDB connection
