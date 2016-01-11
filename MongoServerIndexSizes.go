@@ -21,8 +21,7 @@ func collectAddIndexSize(session *mgo.Session) float64 {
 		result := bson.M{}
 		session.DB(db).Run("dbstats", &result)
 		t := result["indexSize"]
-		fmt.Printf("%s - ", db)
-		fmt.Println(int64(t.(float64)))
+		fmt.Printf("%s: %d\n", db, int64(t.(float64)))
 		indexSize += t.(float64)
 	}
 	return indexSize
@@ -36,5 +35,5 @@ func main() {
 		log.Fatalf("Can't connect to MongoDB: %v", err)
 	}
 	indexSize := collectAddIndexSize(session)
-	fmt.Printf("Total: %v\n", int64(indexSize))
+	fmt.Printf("----------------------\nTotal: %d (%.2f GB)\n", int64(indexSize), (indexSize / 1024 / 1024 / 1024))
 }
