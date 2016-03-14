@@ -32,7 +32,7 @@ func main() {
 	flag.Parse()
 	session, err := getMongoDBConnection(*flagMongoConnectString)
 	if err != nil {
-		log.Fatalf("Can't connect to MongoDB: %v", err)
+		log.Fatalf("Can't connect to MongoDB (%s): %v", *flagMongoConnectString, err)
 	}
 	indexSize := collectAddIndexSize(session)
 	fmt.Printf("----------------------\nTotal: %d (%.2f GB)\n", int64(indexSize), (indexSize / 1024 / 1024 / 1024))
